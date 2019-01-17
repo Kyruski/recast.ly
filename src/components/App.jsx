@@ -3,23 +3,62 @@ import VideoList from './VideoList.js';
 import VideoPlayer from './VideoPlayer.js';
 
 
-var App = () => (
-  <div>
-    <nav className="navbar">
-      <div className="col-md-6 offset-md-3">
-        <div><h5><em>search</em> view goes here</h5></div>
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      videos: exampleVideoData,
+      currentVideo: exampleVideoData[0]
+    };
+  }
+
+  // onVideoTitleClick() {
+  //   App.setState({
+  //     currentVideo: props.video
+  //   });
+  // }
+
+  render() {
+    return (
+      <div>
+        <nav className="navbar">
+          <div className="col-md-6 offset-md-3">
+            <div><h5><em>search</em> view goes here</h5></div>
+          </div>
+        </nav>
+        <div className="row">
+          <div className="col-md-7">
+            <div><h5><em>videoPlayer</em><VideoPlayer state={this.state} /></h5></div>
+          </div>
+          <div className="col-md-5">
+            <div><h5><em>videoList</em><VideoList state={this.state} /></h5></div>
+          </div>
+        </div>
       </div>
-    </nav>
-    <div className="row">
-      <div className="col-md-7">
-        <div><h5><em>videoPlayer</em><VideoPlayer video={exampleVideoData[0]} src={'https://www.youtube.com/embed' + exampleVideoData[0].id.videoId} /></h5></div>
-      </div>
-      <div className="col-md-5">
-        <div><h5><em>videoList</em><VideoList videos={exampleVideoData} /></h5></div>
-      </div>
-    </div>
-  </div>
-);
+    );
+  }
+}
+
+// video={exampleVideoData[0]}
+// videos={exampleVideoData}
+
+// var App = () => (
+//   <div>
+//     <nav className="navbar">
+//       <div className="col-md-6 offset-md-3">
+//         <div><h5><em>search</em> view goes here</h5></div>
+//       </div>
+//     </nav>
+//     <div className="row">
+//       <div className="col-md-7">
+//         <div><h5><em>videoPlayer</em><VideoPlayer video={exampleVideoData[0]} /></h5></div>
+//       </div>
+//       <div className="col-md-5">
+//         <div><h5><em>videoList</em><VideoList videos={exampleVideoData} /></h5></div>
+//       </div>
+//     </div>
+//   </div>
+// );
 
 ReactDOM.render(<App />, document.getElementById('app'));
 
