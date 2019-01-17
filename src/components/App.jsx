@@ -13,6 +13,7 @@ class App extends React.Component {
       currentVideo: exampleVideoData[0],
       searchValue: ''
     };
+    this.delayedCallback = _.debounce(searchYouTube.bind(this), 1000);
   }
 
   onVideoTitleClick(video) {
@@ -49,37 +50,26 @@ class App extends React.Component {
       this.setState({
         videos: data.items
       });
-    })
-      .debounceTime(500);
+    });
   }
 
   onSearchKeyPress(value) {
     this.setState({
       searchValue: value
     });
+
+    this.delayedCallback({
+      max: 10,
+      query: this.state.searchValue
+    }, (data) => {
+      this.setState({
+        videos: data.items
+      });
+    });
   }
 }
 
-// video={exampleVideoData[0]}
-// videos={exampleVideoData}
 
-// var App = () => (
-//   <div>
-//     <nav className="navbar">
-//       <div className="col-md-6 offset-md-3">
-//         <div><h5><em>search</em> view goes here</h5></div>
-//       </div>
-//     </nav>
-//     <div className="row">
-//       <div className="col-md-7">
-//         <div><h5><em>videoPlayer</em><VideoPlayer video={exampleVideoData[0]} /></h5></div>
-//       </div>
-//       <div className="col-md-5">
-//         <div><h5><em>videoList</em><VideoList videos={exampleVideoData} /></h5></div>
-//       </div>
-//     </div>
-//   </div>
-// );
 
 ReactDOM.render(<App />, document.getElementById('app'));
 

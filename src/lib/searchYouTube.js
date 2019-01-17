@@ -3,7 +3,7 @@ import YOUTUBE_API_KEY from '../config/youtube.js';
 
 var searchYouTube = (options, callback) => {
   console.log(options);
-  // let searchTerms = options.query.split('|').join('%7C');
+  let searchTerms = options.query.split('|').join('%7C');
 
   $.ajax({
     type: 'GET',
@@ -12,16 +12,13 @@ var searchYouTube = (options, callback) => {
           videoEmbeddable: 'true',
           maxResults: options.max,
           part: 'snippet',
-          q: options.query,
+          q: searchTerms,
           type: 'video'},
     success: ((data) => {
-      console.log('WE GOT HERE !!!');
       callback(data);
     }),
     error: (() => console.log('YOU MESSED UP!')),
   });
-  // .done( () => { console.log('WE GOT HERE !!!')})
-  // .fail( () => { console.log('YOU MESSED UP!')});
 };
 
 export default searchYouTube;
