@@ -1,6 +1,6 @@
-var Search = () => (
+var Search = (props) => (
   <div className="search-bar form-inline">
-    <input className="form-control" type="text" />
+    <input className="form-control" type="text" onKeyPress={(e) => props.searchHandler(e.target.value)}/>
     <button className="btn hidden-sm-down">
       <span className="glyphicon glyphicon-search"></span>
     </button>
